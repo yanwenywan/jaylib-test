@@ -1,12 +1,11 @@
-package yanwenyuan.jaylibtest;
+package yanwenyuan.jaylibtest.ballgame;
 
 import com.raylib.Colors;
-import com.raylib.Raylib;
 
 import static com.raylib.Raylib.*;
 import static com.raylib.Raylib.Vector2;
 
-class Ball implements Entity {
+class Ball {
     private static final int RADIUS = 40;
     private Vector2 position;
     private boolean selected = false;
@@ -15,7 +14,6 @@ class Ball implements Entity {
         this.position = position;
     }
 
-    @Override
     public void update() {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Vector2Distance(position, GetMousePosition()) < RADIUS) {
             selected = true;
@@ -29,7 +27,6 @@ class Ball implements Entity {
         }
     }
 
-    @Override
     public void draw() {
         DrawCircleV(position, RADIUS, selected ? Colors.RED : Colors.BLUE);
     }
