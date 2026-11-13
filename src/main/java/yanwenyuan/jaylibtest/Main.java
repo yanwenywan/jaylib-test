@@ -1,6 +1,8 @@
 package yanwenyuan.jaylibtest;
 
-import com.raylib.Colors;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 import static com.raylib.Raylib.*;
 
@@ -8,27 +10,20 @@ public class Main {
     static final int SCREEN_WIDTH = 800;
     static final int SCREEN_HEIGHT = 450;
 
-    private static final Ball ball = new Ball(new Vector2().x(SCREEN_WIDTH/2f).y(SCREEN_HEIGHT/2f));
+    private static final Game game = new Game();
 
-    static void update() {
-        ball.update();
-    }
-
-    static void draw() {
-        ClearBackground(Colors.RAYWHITE);
-        DrawText("Window window window!", 192, 200, 20, Colors.LIGHTGRAY);
-        ball.draw();
-    }
-
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Java JNI Raylib window");
         SetTargetFPS(60);
 
+        String data = Files.readString(Path.of("assets/hi.txt"));
+        System.out.println(data);
+
         while (!WindowShouldClose()) {
-            update();
+            game.update();
 
             BeginDrawing();
-            draw();
+            game.draw();
             EndDrawing();
         }
 

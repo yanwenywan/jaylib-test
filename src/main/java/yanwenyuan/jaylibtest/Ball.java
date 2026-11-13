@@ -4,13 +4,14 @@ import com.raylib.Colors;
 import com.raylib.Raylib;
 
 import static com.raylib.Raylib.*;
+import static com.raylib.Raylib.Vector2;
 
 class Ball implements Entity {
     private static final int RADIUS = 40;
-    private Raylib.Vector2 position;
+    private Vector2 position;
     private boolean selected = false;
 
-    public Ball(Raylib.Vector2 position) {
+    public Ball(Vector2 position) {
         this.position = position;
     }
 
