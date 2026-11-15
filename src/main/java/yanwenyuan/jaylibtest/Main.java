@@ -1,38 +1,34 @@
 package yanwenyuan.jaylibtest;
 
-import yanwenyuan.jaylibtest.ballgame.BallGame;
-import yanwenyuan.jaylibtest.shadertest.ShaderDisplay;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-
 import static com.raylib.Raylib.*;
 
 public class Main {
     public static final int SCREEN_WIDTH = 800;
     public static final int SCREEN_HEIGHT = 450;
 
-    private static BallGame ballGame;
-    private static ShaderDisplay display;
+    private static Screens currentScreen = Screens.MENU;
 
-    public static void main(String[] args) throws IOException {
+    static void main() {
         SetConfigFlags(FLAG_MSAA_4X_HINT);
         InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Java JNI Raylib window");
+        SetExitKey(KEY_NULL);  // disables esc to exit
         SetTargetFPS(60);
 
-        ballGame = new BallGame();
-        display = new ShaderDisplay();
-
-        String data = Files.readString(Path.of("assets/hi.txt"));
-        System.out.println(data);
-
         while (!WindowShouldClose()) {
-            display.update();
-            display.draw();
+            if (IsKeyPressed(KEY_ESCAPE)) {
+                switchScreen(Screens.MENU);
+            }
+
+            currentScreen.screen().update(GetFrameTime());
+            currentScreen.screen().draw();
         }
 
-        display.unload();
+        currentScreen.screen().unload();
         CloseWindow();
+    }
+
+    public static void switchScreen(Screens screen) {
+        currentScreen.unload();
+        currentScreen = screen;
     }
 }

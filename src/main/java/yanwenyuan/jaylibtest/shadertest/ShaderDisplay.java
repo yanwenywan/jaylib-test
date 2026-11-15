@@ -2,12 +2,13 @@ package yanwenyuan.jaylibtest.shadertest;
 
 import com.raylib.Colors;
 import yanwenyuan.jaylibtest.Main;
+import yanwenyuan.jaylibtest.Screen;
 
 import static com.raylib.Raylib.*;
-import static yanwenyuan.jaylibtest.util.Vector.vec2;
-import static yanwenyuan.jaylibtest.util.Vector.vec3;
+import static yanwenyuan.jaylibtest.util.Structs.vec2;
+import static yanwenyuan.jaylibtest.util.Structs.vec3;
 
-public class ShaderDisplay {
+public class ShaderDisplay implements Screen {
     private final Camera3D camera;
     private final Model model;
     private final Texture texture;
@@ -36,10 +37,12 @@ public class ShaderDisplay {
         target = LoadRenderTexture(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
     }
 
-    public void update() {
+    @Override
+    public void update(float dt) {
         UpdateCamera(camera, CAMERA_ORBITAL);
     }
 
+    @Override
     public void draw() {
         BeginTextureMode(target);
             ClearBackground(Colors.RAYWHITE);
@@ -63,6 +66,7 @@ public class ShaderDisplay {
         EndDrawing();
     }
 
+    @Override
     public void unload() {
         UnloadShader(shader);
         UnloadTexture(texture);

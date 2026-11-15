@@ -22,6 +22,7 @@ dependencies {
 
 application {
     mainClass = "yanwenyuan.jaylibtest.Main"
+    applicationDefaultJvmArgs = listOf("--enable-native-access=ALL-UNNAMED")
 }
 
 distributions {
