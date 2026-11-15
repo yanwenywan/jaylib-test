@@ -5,8 +5,7 @@ import yanwenyuan.jaylibtest.Main;
 import yanwenyuan.jaylibtest.Screen;
 
 import static com.raylib.Raylib.*;
-import static yanwenyuan.jaylibtest.util.Structs.vec2;
-import static yanwenyuan.jaylibtest.util.Structs.vec3;
+import static yanwenyuan.jaylibtest.util.Structs.*;
 
 public class ShaderDisplay implements Screen {
     private final Camera3D camera;
@@ -57,7 +56,7 @@ public class ShaderDisplay implements Screen {
             BeginShaderMode(shader);
             DrawTextureRec(
                     target.texture(),
-                    new Rectangle().x(0).y(0).width(target.texture().width()).height(-target.texture().height()),
+                    rect(0, 0, target.texture().width(), -target.texture().height()),
                     vec2(0, 0),
                     Colors.WHITE );
             EndShaderMode();
